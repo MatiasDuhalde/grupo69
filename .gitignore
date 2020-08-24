@@ -1,0 +1,8 @@
+.bash_logout
+.bash_history
+.bashrc
+.psql_history
+.cache/
+.gitconfig
+.profile
+.ssh/
