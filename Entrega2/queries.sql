@@ -35,7 +35,11 @@ INNER JOIN puerto_instalacion
 ON instalaciones.instalacion_id = puerto_instalacion.instalacion_id
 INNER JOIN puertos
 ON puertos.puerto_id = puerto_instalacion.puerto_id
-WHERE barcos.nombre ILIKE 'Calypso' AND puertos.nombre ILIKE 'Arica';
+INNER JOIN ciudad_puerto
+ON puertos.puerto_id = ciudad_puerto.puerto_id
+INNER JOIN ciudades
+ON ciudad_puerto.ciudad_id = ciudades.ciudad_id
+WHERE barcos.nombre ILIKE 'Calypso' AND ciudades.nombre ILIKE 'Arica';
 
 -- Query 5
 SELECT puertos.nombre, AVG(personal.edad) AS promedio_edad FROM personal
