@@ -44,7 +44,6 @@ if __name__ == "__main__":
 
     # print(permisos_df)
 
-
     # load personal_instalacion.csv
     personal_instalacion_df = pd.read_csv(PATH_PERSONAL_INSTALACION_CSV, 
         sep=",", header=0, delimiter=None, names=None, index_col=None, usecols=None,
@@ -63,15 +62,58 @@ if __name__ == "__main__":
 
     # print(personal_instalacion_df)
 
+    # REGIONES
+    regiones_out_df = puertos_df[["region_puerto"]]
+    new_headers = {"region_puerto": "nombre"}
+    regiones_out_df = regiones_out_df.rename(columns=new_headers)
+    regiones_out_df.drop_duplicates(inplace=True, ignore_index=True)
+    regiones_out_df.index.rename("region_id", inplace=True)
+    print(regiones_out_df)
+    regiones_out_df.to_csv("datos/output/regiones.csv")
+
+    # CIUDADES
+    ciudades_out_df = puertos_df[["ciudad_puerto"]]
+    new_headers = {"ciudad_puerto": "nombre"}
+    ciudades_out_df = ciudades_out_df.rename(columns=new_headers)
+    ciudades_out_df.drop_duplicates(inplace=True, ignore_index=True)
+    ciudades_out_df.index.rename("ciudad_id", inplace=True)
+    print(ciudades_out_df)
+    ciudades_out_df.to_csv("datos/output/ciudades.csv")
+
+    # REGION_CIUDAD
+    region_ciudad_df = pd.merge(puertos_df, ciudades_out_df.reset_index(), how="inner",
+        left_on=["ciudad_puerto"],
+        right_on=["nombre"])
+    region_ciudad_df = pd.merge(region_ciudad_df, regiones_out_df.reset_index(), how="inner",
+        left_on=["region_puerto"],
+        right_on=["nombre"])
+    region_ciudad_df = region_ciudad_df[["region_id", "ciudad_id"]]
+    region_ciudad_df.drop_duplicates(inplace=True, ignore_index=True)
+    region_ciudad_df.reset_index(inplace=True, drop=True)
+    print(region_ciudad_df)
+    region_ciudad_df.to_csv("datos/output/region_ciudad.csv", index=False)
 
     # PUERTOS
-    puertos_out_df = puertos_df[["nombre_puerto", "ciudad_puerto", "region_puerto"]]
-    new_headers = {"nombre_puerto": "nombre", "ciudad_puerto": "ciudad", "region_puerto": "region"}
+    puertos_out_df = puertos_df[["nombre_puerto"]]
+    new_headers = {"nombre_puerto": "nombre"}
     puertos_out_df = puertos_out_df.rename(columns=new_headers)
     puertos_out_df.drop_duplicates(inplace=True, ignore_index=True)
     puertos_out_df.index.rename("puerto_id", inplace=True)
     print(puertos_out_df)
     puertos_out_df.to_csv("datos/output/puertos.csv")
+
+    # CIUDAD_PUERTO
+    ciudad_puerto_df = pd.merge(puertos_df, ciudades_out_df.reset_index(), how="inner",
+        left_on=["ciudad_puerto"],
+        right_on=["nombre"])
+    ciudad_puerto_df = pd.merge(ciudad_puerto_df, puertos_out_df.reset_index(), how="inner",
+        left_on=["nombre_puerto"],
+        right_on=["nombre"])
+    ciudad_puerto_df = ciudad_puerto_df[["ciudad_id", "puerto_id"]]
+    ciudad_puerto_df.drop_duplicates(inplace=True, ignore_index=True)
+    ciudad_puerto_df.reset_index(inplace=True, drop=True)
+    print(ciudad_puerto_df)
+    ciudad_puerto_df.to_csv("datos/output/ciudad_puerto.csv", index=False)
 
     # INSTALACIONES
     instalaciones_out_df = puertos_df[["id_instalacion", "tipo_instalacion", "capacidad_instalacion"]]
@@ -85,8 +127,8 @@ if __name__ == "__main__":
 
     # PUERTO_INSTALACION
     puerto_instalacion_df = pd.merge(puertos_out_df.reset_index(), puertos_df, how="inner",
-        right_on=["nombre_puerto", "ciudad_puerto", "region_puerto"],
-        left_on=["nombre", "ciudad", "region"])
+        right_on=["nombre_puerto"],
+        left_on=["nombre"])
     puerto_instalacion_df = puerto_instalacion_df[["puerto_id", "id_instalacion"]]
     puerto_instalacion_df.drop_duplicates(inplace=True, ignore_index=True)
     puerto_instalacion_df.rename(columns={"id_instalacion": "instalacion_id"}, inplace=True)

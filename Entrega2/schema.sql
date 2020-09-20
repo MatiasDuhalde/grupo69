@@ -1,6 +1,10 @@
 -- delete previous tables
 
+DROP TABLE if exists regiones cascade;
+DROP TABLE if exists ciudades cascade;
+DROP TABLE if exists region_ciudad cascade;
 DROP TABLE if exists puertos cascade;
+DROP TABLE if exists ciudad_puerto cascade;
 DROP TABLE if exists instalaciones cascade;
 DROP TABLE if exists puerto_instalacion cascade;
 DROP TABLE if exists personal cascade;
@@ -16,11 +20,29 @@ DROP TABLE if exists atraca_en cascade;
 
 -- create tables
 
+CREATE TABLE regiones (
+    region_id   SERIAL PRIMARY KEY,
+    nombre      VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE ciudades (
+    ciudad_id   SERIAL PRIMARY KEY,
+    nombre      VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE region_ciudad (
+    region_id   INTEGER NOT NULL REFERENCES regiones (region_id),
+    ciudad_id   INTEGER NOT NULL REFERENCES ciudades (ciudad_id)
+);
+
 CREATE TABLE puertos (
     puerto_id   SERIAL PRIMARY KEY,
-    nombre      VARCHAR(255) NOT NULL,
-    ciudad      VARCHAR(255) NOT NULL,
-    region      VARCHAR(255) NOT NULL
+    nombre      VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE ciudad_puerto (
+    ciudad_id   INTEGER NOT NULL REFERENCES ciudades (ciudad_id),
+    puerto_id   INTEGER NOT NULL REFERENCES puertos (puerto_id)
 );
 
 CREATE TABLE instalaciones (
