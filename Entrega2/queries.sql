@@ -51,6 +51,10 @@ FROM (SELECT puertos.nombre, COUNT(DISTINCT atraca_en.patente) AS barcos_atracad
       ON puertos.puerto_id = puerto_instalacion.puerto_id
       INNER JOIN atraca_en
       ON puerto_instalacion.instalacion_id = atraca_en.instalacion_id
+      INNER JOIN permisos
+      ON atraca_en.permiso_id = permisos.permiso_id
+      WHERE DATE_PART('month', permisos.fecha_atraque) = 8 AND
+      DATE_PART('year', permisos.fecha_atraque) = 2020
       GROUP BY puertos.nombre) AS t
 ORDER BY barcos_atracados DESC
 LIMIT 1;
