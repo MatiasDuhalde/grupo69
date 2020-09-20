@@ -1,7 +1,11 @@
 -- Query 1
-SELECT nombre, ciudad, region FROM puertos;
+SELECT ciudades.ciudad_id, ciudades.nombre, puertos.puerto_id, puertos.nombre FROM puertos
+INNER JOIN ciudad_puerto
+ON ciudad_puerto.puerto_id = puertos.puerto_id
+INNER JOIN ciudades
+ON ciudad_puerto.ciudad_id = ciudades.ciudad_id;
 
--- Query 2 (mejillones es puerto o ciudad?)
+-- Query 2 (mejillones es puerto)
 SELECT personal.rut, personal.nombre, edad, sexo, jefe_instalacion.instalacion_id FROM personal
 INNER JOIN jefe_instalacion
 ON personal.rut = jefe_instalacion.rut
@@ -12,15 +16,14 @@ ON puerto_instalacion.puerto_id = puertos.puerto_id
 WHERE puertos.nombre ILIKE 'Mejillones';
 
 -- Query 3
-SELECT DISTINCT puertos.nombre, puertos.ciudad, puertos.region FROM puertos
+SELECT DISTINCT puertos.nombre FROM puertos
 INNER JOIN puerto_instalacion
 ON puertos.puerto_id = puerto_instalacion.puerto_id
 INNER JOIN instalaciones
 ON instalaciones.instalacion_id = puerto_instalacion.instalacion_id
 WHERE instalaciones.tipo ILIKE 'astillero';
 
-
--- Query 4 (Arica es puerto o ciudad? También mostrar descripcion/fecha_salida?)
+-- Query 4 (Arica es puerto, ciudad, o región? También mostrar descripcion/fecha_salida?)
 SELECT permisos.permiso_id, atraca_en.instalacion_id, instalaciones.tipo, permisos.fecha_atraque FROM permisos
 INNER JOIN atraca_en
 ON atraca_en.permiso_id = permisos.permiso_id
@@ -32,7 +35,7 @@ INNER JOIN puerto_instalacion
 ON instalaciones.instalacion_id = puerto_instalacion.instalacion_id
 INNER JOIN puertos
 ON puertos.puerto_id = puerto_instalacion.puerto_id
-WHERE barcos.nombre ILIKE 'Calypso' AND (puertos.nombre ILIKE 'Arica' OR puertos.ciudad ILIKE 'Arica');
+WHERE barcos.nombre ILIKE 'Calypso' AND puertos.nombre ILIKE 'Arica';
 
 -- Query 5
 SELECT puertos.nombre, AVG(personal.edad) AS promedio_edad FROM personal
