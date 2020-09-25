@@ -1,0 +1,11 @@
+.card-content {
+  padding: 16px;
+}
+
+.query-button {
+    float: right;
+}
+
+.mdc-text-field {
+  margin: 6px;
+}
