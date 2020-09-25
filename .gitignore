@@ -7,4 +7,9 @@
 .profile
 .ssh/
 
+*.zip
+
+
+scrap_scripts/
+
 __pycache__/
