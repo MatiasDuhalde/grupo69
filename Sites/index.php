@@ -3,6 +3,7 @@
 <head>
   <title>Grupo 69 - Home</title>
   <?php include("modules/material.html") ?>
+  <?php include("modules/cards.php") ?>
 </head>
 <body>
 <script>0</script>
@@ -10,7 +11,7 @@
   <?php include("modules/side_bar.html") ?>
   <div class="mdc-drawer-app-content">
     <main class="main-content" id="main-content">
-      <div class="mdc-top-app-bar--fixed-adjust"></div>
+      <div class="mdc-top-app-bar--fixed-adjust" id="top"></div>
       <div class="mdc-layout-grid mdc-layout-grid--align-right">
         <div class="mdc-layout-grid__inner">
 
@@ -18,7 +19,7 @@
             <h1 class="mdc-typography--headline3">Consulta 1</h1>
             <p class="mdc-typography--body1">Mostrar todos los <b>puertos</b> junto con la <b>ciudad</b> a la que son asignados</p>
             <div>
-              <button class="mdc-button mdc-button--outlined query-button" id="button-query-1">
+              <button class="mdc-button mdc-button--raised query-button" id="button-query-1">
               <div class="mdc-button__ripple"></div>
               <span class="mdc-button__label">Consultar</span>
               </button>
@@ -39,7 +40,7 @@
               </span>
             </label>
             <div>
-              <button class="mdc-button mdc-button--outlined query-button" id="button-query-2">
+              <button class="mdc-button mdc-button--raised query-button" id="button-query-2">
               <div class="mdc-button__ripple"></div>
               <span class="mdc-button__label">Consultar</span>
               </button>
@@ -50,7 +51,7 @@
             <h1 class="mdc-typography--headline3">Consulta 3</h1>
             <p class="mdc-typography--body1">Mostrar todos los <b>puertos</b> que tienen al menos un <b>astillero</b></p>
             <div>
-              <button class="mdc-button mdc-button--outlined query-button" id="button-query-3">
+              <button class="mdc-button mdc-button--raised query-button" id="button-query-3">
               <div class="mdc-button__ripple"></div>
               <span class="mdc-button__label">Consultar</span>
               </button>
@@ -81,7 +82,7 @@
               </span>
             </label>
             <div>
-              <button class="mdc-button mdc-button--outlined query-button" id="button-query-4">
+              <button class="mdc-button mdc-button--raised query-button" id="button-query-4">
               <div class="mdc-button__ripple"></div>
               <span class="mdc-button__label">Consultar</span>
               </button>
@@ -92,7 +93,7 @@
             <h1 class="mdc-typography--headline3">Consulta 5</h1>
             <p class="mdc-typography--body1">Mostrar la edad promedio de los <b>trabajadores</b> de cada <b>puerto</b></p>
             <div>
-              <button class="mdc-button mdc-button--outlined query-button" id="button-query-5">
+              <button class="mdc-button mdc-button--raised query-button" id="button-query-5">
               <div class="mdc-button__ripple"></div>
               <span class="mdc-button__label">Consultar</span>
               </button>
@@ -103,7 +104,7 @@
             <h1 class="mdc-typography--headline3">Consulta 6</h1>
             <p class="mdc-typography--body1">Mostrar el <b>puerto</b> que ha recibido más <b>barcos</b> en <i>Agosto del 2020</i></p>
             <div>
-              <button class="mdc-button mdc-button--outlined query-button" id="button-query-6">
+              <button class="mdc-button mdc-button--raised query-button" id="button-query-6">
               <div class="mdc-button__ripple"></div>
               <span class="mdc-button__label">Consultar</span>
               </button>
@@ -119,8 +120,34 @@
         </div>
       </div>
 
-      <footer>
-        <p>THIS IS THE FOOTER</p>
+      <footer id="page-footer">
+        <div class="mdc-theme--on-primary">
+          <div class="mdc-layout-grid mdc-layout-grid--align-right">
+            <div class="mdc-layout-grid__inner">
+              <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4" >
+                <div class="mdc-typography--body1" style="text-align: center">
+                  <a class="" href="https://github.com/MatiasDuhalde">
+                    <img src="images/icons/GitHub-Mark-Light-64px.png">
+                  </a>
+                  <p>Matías Duhalde</p>
+                </div>
+              </div>
+              <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4">
+                <h1 class="mdc-typography--headline2" style="text-align: center">Grupo 69</h1>
+                <div id="result-placeholder" style="margin: auto">
+                </div>
+              </div>
+              <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4">
+                <div class="mdc-typography--body1" style="text-align: center">
+                  <a class="" href="https://github.com/GabrielAguirre3">
+                    <img src="images/icons/GitHub-Mark-Light-64px.png">
+                  </a>
+                  <p>Gabriel Aguirre</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </footer>
     </main>
   </div>
