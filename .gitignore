@@ -10,6 +10,7 @@
 *.zip
 
 
+Sites/images/
 scrap_scripts/
 
 __pycache__/
