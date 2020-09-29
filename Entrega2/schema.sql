@@ -77,8 +77,8 @@ CREATE TABLE cierres (
     cierre_id           SERIAL PRIMARY KEY,
     instalacion_id      INTEGER NOT NULL REFERENCES instalaciones (instalacion_id),
     rut                 VARCHAR(255) NOT NULL REFERENCES personal (rut),
-    fecha_cierre        DATE NOT NULL,
-    fecha_reapertura    DATE
+    fecha_cierre        TIMESTAMP NOT NULL,
+    fecha_reapertura    TIMESTAMP
 );
 
 CREATE TABLE barcos (
@@ -89,7 +89,7 @@ CREATE TABLE barcos (
 
 CREATE TABLE permisos (
     permiso_id      SERIAL PRIMARY KEY,
-    fecha_atraque   DATE NOT NULL
+    fecha_atraque   TIMESTAMP NOT NULL
 );
 
 -- está bien poner herencia así?? (IsA)
@@ -102,7 +102,7 @@ CREATE TABLE permisos (
 CREATE TABLE permisos_astillero (
     p_astillero_id  SERIAL PRIMARY KEY,
     permiso_id      INTEGER NOT NULL REFERENCES permisos (permiso_id),
-    fecha_salida    DATE
+    fecha_salida    TIMESTAMP
 );
 
 CREATE TABLE permisos_muelle (
